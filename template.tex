@@ -1,0 +1,223 @@
+% **************************************************
+% Document Class Definition
+% **************************************************
+\documentclass[%
+    paper=A4,               % paper size --> A4 is default in Germany
+    twoside=false,           % onesite or twoside printing
+    openright,              % doublepage cleaning ends up right side
+    parskip=full,           % spacing value / method for paragraphs
+    chapterprefix=true,     % prefix for chapter marks
+    11pt,                   % font size
+    headings=normal,        % size of headings
+    bibliography=totoc,     % include bib in toc
+    listof=totoc,           % include listof entries in toc
+    titlepage=on,           % own page for each title page
+    captions=tableabove,    % display table captions above the float env
+    draft=false,            % value for draft version
+]{scrreprt}%
+
+
+% **************************************************
+% Setup YOUR thesis document in this file !
+% **************************************************
+% !TEX root = book.tex
+% !TeX encoding = UTF-8
+
+
+% **************************************************
+% Files' Character Encoding
+% **************************************************
+\PassOptionsToPackage{utf8}{inputenc}
+\usepackage{inputenc}
+\usepackage{amsfonts}
+
+% **************************************************
+% Load and Configure Packages
+% **************************************************
+\usepackage[english]{babel} % babel system, adjust the language of the content
+\PassOptionsToPackage{% setup clean thesis style
+    figuresep=colon,%
+    sansserif=false,%
+    hangfigurecaption=false,%
+    hangsection=true,%
+    hangsubsection=true,%
+    colorize=full,%
+    colortheme=bluemagenta,%
+    bibsys=biber,%
+    bibfile=bib-refs,%
+    bibstyle=alphabetic,%
+    wrapfooter=false,%
+}{cleanthesis}
+
+\PassOptionsToPackage{table,xcdraw}{xcolor}
+\usepackage{cleanthesis}
+
+\hypersetup{% setup the hyperref-package options
+    pdftitle={\thesisTitle},    %   - title (PDF meta)
+    pdfsubject={\thesisSubject},%   - subject (PDF meta)
+    pdfauthor={\thesisName},    %   - author (PDF meta)
+    plainpages=false,           %   -
+    colorlinks=false,           %   - colorize links?
+    pdfborder={0 0 0},          %   -
+    breaklinks=true,            %   - allow line break inside links
+    bookmarksnumbered=true,     %
+    bookmarksopen=true          %
+}
+
+\usepackage{epigraph}
+\setlength\epigraphwidth{.8\textwidth}
+\setlength\epigraphrule{0pt}
+
+\usepackage{tabularx}
+\usepackage{graphicx}
+\usepackage{pgf,tikz,pgfplots}
+\usepackage{mathrsfs}
+\pgfplotsset{compat=1.15}
+\usetikzlibrary{datavisualization}
+\usetikzlibrary{datavisualization.formats.functions}
+\usetikzlibrary{arrows,positioning}
+\usetikzlibrary{shadows}
+\usepackage[bottom]{footmisc}
+\makeatletter
+\@addtoreset{footnote}{section}
+\makeatother
+\renewcommand{\thefootnote}{\roman{footnote}}
+\usepackage{wrapfig}
+\usepackage{xcolor}
+\usepackage{listings}
+\lstset{
+    language=C++, % choose the language of the code
+    basicstyle=\footnotesize\ttfamily, %\color{red},
+	keywordstyle=\color{blue}\ttfamily,
+    stringstyle=\color{red}\ttfamily,
+    commentstyle=\color{gray}\ttfamily,
+    extendedchars=false,
+    numbers=left, % where to put the line-numbers
+    numberstyle=\tiny, % the size of the fonts that are used for the line-numbers
+    showspaces=false, % show spaces adding particular underscores
+    showstringspaces=false, % underline spaces within strings
+    showtabs=false, % show tabs within strings adding particular underscores
+    frame=single, % adds a frame around the code
+    tabsize=2, % sets default tabsize to 2 spaces
+    captionpos=b, % sets the caption-position to bottom
+    breaklines=true, % sets automatic line breaking
+    breakatwhitespace=false,
+}
+
+%% packages & settings for xeCJK
+\let\latinencoding\relax %% fix build (https://github.com/wspr/fontspec/issues/312)
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\setmainfont{Times New Roman}
+\setCJKmainfont[AutoFakeBold=4,AutoFakeSlant=.3]{[微軟正黑體.ttc]}
+%\setCJKmainfont[AutoFakeBold=4,AutoFakeSlant=.3]{DFKai-SB}
+%\setCJKmainfont[AutoFakeBold=4,AutoFakeSlant=.3]{PingFang TC}
+%\setCJKmainfont[AutoFakeBold=4,AutoFakeSlant=.3]{Heiti TC}
+\setCJKsansfont{[微軟正黑體.ttc]}
+%\setCJKmonofont{Andale Mono}
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip = 0pt plus 1pt
+\setlength{\parindent}{2em}
+
+%$ Problem Gen
+\usepackage{amsmath}
+\usepackage{float}
+\newcommand{\problembox}[3]{
+    \begin{table}[H]
+        \centering
+        \begin{tabularx}{\textwidth}{|Xr|}
+            \hline
+            #1 & #2 \\ \hline
+            \multicolumn{2}{|>{\hsize=\dimexpr2\hsize+2\tabcolsep+\arrayrulewidth\relax}X|}{#3} \\ \hline
+        \end{tabularx}
+    \end{table}
+}
+
+\usepackage{outlines}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{multirow}
+%% For flow.tex
+\usepackage{amsthm}
+\usepackage{longtable}
+\usepackage{array}
+
+\DeclareMathOperator{\ori}{ori}
+\DeclareMathOperator{\sign}{sign}
+
+% **************************************************
+% Document CONTENT
+% **************************************************
+\begin{document}
+
+% --------------------------
+% rename document parts
+% --------------------------
+%\renewcaptionname{ngerman}{\figurename}{Abb.}
+%\renewcaptionname{ngerman}{\tablename}{Tab.}
+\renewcaptionname{english}{\figurename}{圖}
+\renewcaptionname{english}{\tablename}{表}
+\renewcommand{\lstlistingname}{程式碼}
+\makeatletter
+\@addtoreset{algorithm}{chapter}% algorithm counter resets every chapter
+\makeatother
+\renewcommand{\thealgorithm}{\arabic{chapter}.\arabic{algorithm}}
+\newtheorem{definition}{定義}[chapter] %[subsection]
+\newtheorem{theorem}{定理}[chapter] %[subsection]
+\newtheorem{corollary}{推論}[theorem]
+\newtheorem{lemma}[theorem]{引理}
+
+\newcommand{\algorithmname}{演算法}
+\floatname{algorithm}{\algorithmname}
+\newcommand{\theoremname}{定理}
+\floatname{theorem}{\theoremname}
+
+\newcommand{\Ord}{\operatorname{\mathcal{O}}}
+\newcommand{\ord}[1]{\mathcal{O}\left(#1\right)}
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}
+\newcommand{\ceil}[1]{\lceil #1 \rceil}
+\newcommand{\opord}{\operatorname{\mathcal{O}}}
+\newcommand{\argmax}{\operatorname{arg\,max}}
+\newcommand{\str}[1]{\texttt{"#1"}}
+\newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
+
+% for display keyboard
+\newcommand*\keystroke[1]{%
+  \tikz[baseline=(key.base)]
+    \node[%
+      draw,
+      fill=white,
+      drop shadow={shadow xshift=0.25ex,shadow yshift=-0.25ex,fill=black,opacity=0.75},
+      rectangle,
+      rounded corners=2pt,
+      inner sep=1pt,
+      line width=0.5pt,
+      font=\scriptsize\sffamily
+    ](key) {#1\strut}
+  ;
+}
+
+% --------------------------
+% Body matter
+% --------------------------
+\pagenumbering{arabic}			% arabic page numbering
+\setcounter{page}{1}			% set page counter
+\pagestyle{maincontentstyle} 	% fancy header and footer
+
+% HERE FOR REPORT %
+\input{report.tex}
+
+{%
+\setstretch{1.1}
+\renewcommand{\bibfont}{\normalfont\small}
+\setlength{\biblabelsep}{0pt}
+\setlength{\bibitemsep}{0.5\baselineskip plus 0.5\baselineskip}
+\printbibliography[nottype=online]
+\printbibliography[heading=subbibliography,title={Webpages},type=online,prefixnumbers={@}]
+}
+\cleardoublepage
+
+\end{document}

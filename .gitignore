@@ -1,0 +1,12 @@
+*.toc
+*.synctex.gz
+*.out
+*.log
+*.aux
+*.lot
+*.lof
+*.bcf
+*.run.xml
+*.o
+assignment4
+.idea

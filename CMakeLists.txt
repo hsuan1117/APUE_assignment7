@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.26)
+project(assignment7 C)
+
+set(CMAKE_C_STANDARD 11)
+
+add_executable(assignment7 assignment7.c)

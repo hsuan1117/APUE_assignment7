@@ -1,0 +1,29 @@
+\chapter{Assignment4 Report}
+
+
+\section{Implementation Details}
+
+We use the \textit{strftime} function in \textit{time.h} to get the current time, and use \textit{localtime} to convert the time to the local time.
+Then we use \textit{strftime} to convert the time to the format we want, and print it out.
+
+\section{Change Timezone}
+
+To test the program, we can change the timezone to Taipei with the following command:
+\textit{sudo tzsetup Asia/Taipei}
+
+then we can use \textit{./assignment4} to check the current time.
+
+After that, we can change the timezone to Japan with the following command:
+
+\textit{sudo tzsetup Asia/Tokyo}
+
+then we can use \textit{./assignment4} to check the current time.
+
+
+\newpage
+\section{Codes}
+\lstinputlisting[language=C, caption=assignment1.c]{assignment4.c}
+
+\lstinputlisting[language=shell, caption=指令紀錄]{output.sh}
+\newpage
+\lstinputlisting[language=makefile, caption=Makefile]{Makefile}

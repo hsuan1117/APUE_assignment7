@@ -1,28 +1,26 @@
-\chapter{Assignment4 Report}
+\chapter{Assignment7 Report}
 
 
 \section{Implementation Details}
 
-We use the \textit{strftime} function in \textit{time.h} to get the current time, and use \textit{localtime} to convert the time to the local time.
-Then we use \textit{strftime} to convert the time to the format we want, and print it out.
+Why the Child Process Does Not Have a Controlling Terminal:
 
-\section{Change Timezone}
+When a new session is created by the child process using setsid(), the child becomes the session leader of this new session. As part of this, the child process also loses its controlling terminal if it had one. This is because sessions are designed to be independent entities in terms of controlling terminals, allowing for background processes and daemons that do not need user interaction.
+PID, PGRP, and TPGID Values:
 
-To test the program, we can change the timezone to Taipei with the following command:
-\textit{sudo tzsetup Asia/Taipei}
+PID (Process ID): Unique identifier for each process.
+PGRP (Process Group ID): ID of the process group. A process group is a collection of one or more processes, usually associated with the same job, that can receive signals collectively.
+TPGID (Terminal Process Group ID): ID of the foreground process group of the controlling terminal. If a process does not have a controlling terminal, this will be -1.
+In the case of our child process:
 
-then we can use \textit{./assignment4} to check the current time.
-
-After that, we can change the timezone to Japan with the following command:
-
-\textit{sudo tzsetup Asia/Tokyo}
-
-then we can use \textit{./assignment4} to check the current time.
-
+The PID will be the unique identifier for the child process.
+The PGRP will be the same as the child's PID since it becomes a process group leader.
+The TPGID will be -1, indicating no controlling terminal.
+Compile and run this program in a Unix-like environment to observe the behavior. Make sure to have necessary permissions and configurations to execute system calls like fork() and setsid().
 
 \newpage
 \section{Codes}
-\lstinputlisting[language=C, caption=assignment1.c]{assignment4.c}
+\lstinputlisting[language=C, caption=assignment7.c]{assignment7.c}
 
 \lstinputlisting[language=shell, caption=指令紀錄]{output.sh}
 \newpage

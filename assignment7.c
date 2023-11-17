@@ -32,6 +32,7 @@ int main() {
     } else if (pid > 0) {
         // parent process
         // semaphore wait
+        printf("parent process pid: %d, pgid: %d, sid: %d\n", getpid(), getpgid(getpid()), getsid(getpid()));
         wait(NULL);
     } else {
         perror("Error: cannot fork a new process\n");

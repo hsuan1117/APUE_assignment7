@@ -1,30 +1,11 @@
-\chapter{Assignment7 Report}
+\chapter{Assignment10 Report}
+
+\section{Implementation of thread-safe \textit{getenv()}}
+This version of implementation includes a mutex lock, called env_mutex.
+It used a pthread key to save the result of the environment variable.
+when a shared variable \textit{envbuf} NULL, it will traverse the environ to get the environment variable and save it to \textit{envbuf}, also unlock the mutex.
+After saving the result, the key \textit{envbuf} will not be NULL and return the result.
 
 
-\section{Some Background}
-\begin{enumerate}
-\item PID (Process ID): Unique identifier for each process.
-\item PGRP (Process Group ID): ID of the process group. A process group is a collection of one or more processes.
-\item TPGID (Terminal Process Group ID): ID of the foreground process group of the controlling terminal. If a process does not have a controlling terminal, this will be 0 (in Unix environment, like BSD, Mac), or -1 (in Linux environemnet, tested on Ubuntu).
-\end{enumerate}
-
-\section{Implementation}
-When we \textit{fork()} a process, the return value of \textit{fork()} is the PID of the child process in the parent process, and 0 in the child process.
-So we can use this to distinguish the parent process and the child process.
-
-In the child process, we can use \textit{setsid()} to create a new session.
-
-Because the child process has its own session, so it does not have a controlling terminal, and it'll be the leader of the process group.
-
-The value of PID, PGID will be the same in the child process, and the value of TPGID will be 0 (in Unix environment, like BSD, Mac), or -1 (in Linux environemnet, tested on Ubuntu).
 
 \newpage
-
-
-\section{Codes}
-\lstinputlisting[language=C, caption=assignment7.c]{assignment7.c}
-\newpage
-\lstinputlisting[language=shell, caption=指令紀錄 (On BSD)]{bsd.sh}
-\lstinputlisting[language=shell, caption=指令紀錄 (On Ubuntu)]{ubuntu.sh}
-\newpage
-\lstinputlisting[language=makefile, caption=Makefile]{Makefile}

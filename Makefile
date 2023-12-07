@@ -1,8 +1,8 @@
 CC = gcc
 CFLAG = -std=c11 -O2 -Wall
-TARGET = assignment7
-SRCS = assignment7.c
-OBJS = assignment7.o
+TARGET = assignment10
+SRCS = assignment10.c
+OBJS = assignment10.o
 
 RPT_FILES := report.tex
 PDF_FILES := report.pdf
